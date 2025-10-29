@@ -13,7 +13,10 @@ namespace LibraryManagementSystem.Attributes
             if (authService == null || !authService.IsAuthenticated())
             {
                 context.Result = new RedirectToActionResult("Login", "Account", new { returnUrl = context.HttpContext.Request.Path });
+                return;
             }
+
+            base.OnActionExecuting(context);
         }
     }
 }

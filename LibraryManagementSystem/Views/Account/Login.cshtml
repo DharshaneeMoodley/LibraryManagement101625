@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <h3 class="mb-3">Library Management System</h3>
+                    <p class="text-muted">Sign in to continue</p>
+                </div>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger alert-dismissible fade show">
+                        <i class="bi bi-exclamation-triangle-fill"></i> @ViewBag.Error
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show">
+                        <i class="bi bi-check-circle-fill"></i> @TempData["Success"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                <form method="post" asp-action="Login" asp-controller="Account">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+
+                    <div class="mb-3">
+                        <label for="userName" class="form-label">Username</label>
+                        <input type="text"
+                               class="form-control form-control-lg"
+                               id="userName"
+                               name="userName"
+                               placeholder="Enter your username"
+                               required
+                               autofocus />
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password"
+                               class="form-control form-control-lg"
+                               id="password"
+                               name="password"
+                               placeholder="Enter your password"
+                               required />
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            Sign In
+                        </button>
+                    </div>
+                </form>
+
+                <hr class="my-4">
+
+                <div class="text-center">
+                    <small class="text-muted">
+                        <strong>Default Credentials:</strong><br>
+                        <code>superadmin / Password123!</code><br>
+                        <code>admin / Password123!</code><br>
+                        <code>librarian / Password123!</code>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+</style>

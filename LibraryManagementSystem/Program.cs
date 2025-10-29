@@ -18,7 +18,7 @@ namespace LibraryManagementSystem
                 options.IdleTimeout = TimeSpan.FromHours(2);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
-                options.Cookie.Name = ",LibraryManagement.Session";
+                options.Cookie.Name = ".LibraryManagement.Session";
             });
 
             //Required for Auth Service
@@ -55,11 +55,13 @@ namespace LibraryManagementSystem
 
             app.UseRouting();
 
+            app.UseSession();
+
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Login}/{id?}");
 
             app.Run();
         }
